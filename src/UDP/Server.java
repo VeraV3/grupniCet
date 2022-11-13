@@ -1,3 +1,5 @@
+package UDP;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -6,11 +8,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Serveric {
+public class Server {
     public static final int port_server = 12345;
 
     public static void main(String[] args) {
-        Serveric server = new Serveric(port_server);
+        Server server = new Server(port_server);
         server.izvrsi();
     }
 
@@ -18,7 +20,7 @@ public class Serveric {
     private Set<KorisnickaNit> skupKorisnika = new HashSet<>();
 
 
-    public Serveric(int port)
+    public Server(int port)
     {
         this.port = port;
 
@@ -29,11 +31,10 @@ public class Serveric {
                 System.out.println("Slusa...");
                 while(true){
                     Socket klijent = serverSoket.accept();
-                    System.out.println("Konektovan. "+ klijent);
+                    System.out.println("Konektovan na port  "+ klijent.getPort());
                     KorisnickaNit korisnikNit = new KorisnickaNit(klijent, this);
-                    System.out.println(korisnikNit.getIme());
-                    this.skupKorisnika.add(korisnikNit);
                     korisnikNit.start();
+                    this.skupKorisnika.add(korisnikNit);
                     //System.out.println(this.dajImena());
                     //System.out.println("Servercic:Pokrenuta je korisnicka nit");
                 }

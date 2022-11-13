@@ -1,12 +1,13 @@
+package UDP;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Klijent {
     public static void main(String[] args) {
-        Klijent klijent = new Klijent("localhost", Serveric.port_server);
+        Klijent klijent = new Klijent("localhost", Server.port_server);
         klijent.izvrsi();
 
     }
@@ -27,24 +28,16 @@ public class Klijent {
 
           Socket soket = new Socket(this.hostname, this.port);
 
-
-
-            /* Scanner sc = new Scanner(System.in))*/
-      /*   //   System.out.println("Klijent je konektovan na server!\n");
-           // System.out.println("Unesi svoje ime:");
-            //this.ime  = sc.nextLine();
-            //System.out.println(this.ime);*/
-
-
-            Thread n2 = new NitZaPisanje(this.ime, soket);
-            n2.start();
-            Thread n1 = new NitZaCitanje(this.ime, soket);
-            n1.start();
+          Thread n2 = new NitZaPisanje(this.ime, soket);
+          n2.start();
+          Thread n1 = new NitZaCitanje(this.ime, soket);
+          n1.start();
 
         } catch (UnknownHostException e) {
-            System.out.println("Nesto nije u redu s hostom valjda");
+            System.out.println("Nesto nije u redu s hostom.");
             e.printStackTrace();
         } catch (IOException e) {
+            System.out.println("problem u try bloku u klasi Klijent");
             e.printStackTrace();
         }
     }
@@ -54,7 +47,7 @@ public class Klijent {
             System.out.println("Unesi svoje ime:");
             this.ime = sc.nextLine();
         } catch (Exception e) {
-            System.out.println("Nije uspelo otvaranje skenera i postavljanje imena!");
+            System.out.println("Nije uspelo otvaranje skenera i postavljanje imena u klasi Klijent!");
             e.printStackTrace();
         }
 
@@ -67,7 +60,7 @@ public class Klijent {
 
     @Override
     public String toString() {
-        return "Klijent{" +
+        return "UDP.Klijent{" +
                 "hostname='" + hostname + '\'' +
                 ", port=" + port +
                 ", ime='" + ime + '\'' +
