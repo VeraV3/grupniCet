@@ -35,8 +35,7 @@ public class Server {
                     KorisnickaNit korisnikNit = new KorisnickaNit(klijent, this);
                     korisnikNit.start();
                     this.skupKorisnika.add(korisnikNit);
-                    //System.out.println(this.dajImena());
-                    //System.out.println("Servercic:Pokrenuta je korisnicka nit");
+;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -48,7 +47,7 @@ public class Server {
             return this.skupKorisnika.stream().map(KorisnickaNit::getIme).collect(Collectors.toList());
     }
 
-    public void dobrodoslica(String s, KorisnickaNit korisnickaNit) {
+    public void porukaSvima(String s, KorisnickaNit korisnickaNit) {
             this.skupKorisnika.stream()
                     .filter(u->u!=korisnickaNit)
                     .forEach(u->u.posaljiPoruku(s));

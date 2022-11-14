@@ -33,11 +33,11 @@ public class NitZaPisanje extends Thread{
             //radi System.out.println("UDP.NitZaPisanje:Skener je uspesno otvoren!");
             while(!recenica.equalsIgnoreCase("bye")){
 
-                System.out.println("Otvoren je skener i privatam ono sto je uneto ==> " + recenica);
+                //radiSystem.out.println("Otvoren je skener i privatam ono sto je uneto ==> " + recenica);
                 System.out.printf("\r[%s]:", this.ime);
                 this.pw.println(recenica);
                 recenica = sc.nextLine();
-               System.out.println("UDP.NitZaPisanje: u pw je poslata uneta recenica.");
+               //ovo mi ispisuje posle bye System.out.println("UDP.NitZaPisanje: u pw je poslata uneta recenica.");
                 /*this.bw.write(recenica);
                 this.bw.newLine();
                 this.bw.flush();*/

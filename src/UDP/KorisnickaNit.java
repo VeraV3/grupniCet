@@ -23,17 +23,17 @@ public class KorisnickaNit extends Thread{
             this.ime = br.readLine();
             System.out.println("Procitano je ime  " + this.ime);
             this.posaljiPoruku("Trenutno kontektovani korisnici su: " + server.dajImena());
-           // this.servercic.dobrodoslica("Novi konektovani korisnik:"+this.ime, this);
+            this.server.porukaSvima("Novi konektovani korisnik:"+this.ime, this);
             String porukaKorisnika;
             do{
                 porukaKorisnika=br.readLine();
                 if(porukaKorisnika==null)
                     break;
-                //this.servercic.dobrodoslica("["+this.ime+"]"+porukaKorisnika, this);
+                this.server.porukaSvima("["+this.ime+"]:" + porukaKorisnika, this);
             }while(!(porukaKorisnika.equalsIgnoreCase("bye")));
             this.server.ukloni(this);
             this.klijentSoket.close();
-           // servercic.dobrodoslica(this.ime+"je napustio cet\n", this);
+            server.porukaSvima(this.ime+"je napustio cet\n", this);
         } catch (IOException e) {
             System.out.println("U korisnickoj niti doslo je do izuzetka");
             e.printStackTrace();

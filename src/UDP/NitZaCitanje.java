@@ -29,7 +29,7 @@ public class NitZaCitanje extends Thread{
               //radi  System.out.println("uslo i while petlju" );
                 //ne radi System.out.println("ovooooooooo"+this.br.readLine());
                String recenica = this.br.readLine();
-                System.out.println("procitalo recenicu");
+               //radi System.out.println("procitalo recenicu");
 
                 if (recenica == null) {
                     System.out.println("Konekcija je prekinuta.\n");
