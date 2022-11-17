@@ -33,8 +33,9 @@ public class Server {
                     Socket klijent = serverSoket.accept();
                     System.out.println("Konektovan na port  "+ klijent.getPort());
                     KorisnickaNit korisnikNit = new KorisnickaNit(klijent, this);
-                    korisnikNit.start();
                     this.skupKorisnika.add(korisnikNit);
+                    korisnikNit.start();
+
 ;
                 }
             } catch (IOException e) {

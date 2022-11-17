@@ -19,21 +19,24 @@ public class KorisnickaNit extends Thread{
 
             this.pw = new PrintWriter(new OutputStreamWriter(klijentSoket.getOutputStream()), true);
             BufferedReader br = new BufferedReader(new InputStreamReader(klijentSoket.getInputStream()));
-            //System.out.println("Otvoreni su privnt Writer i BufeeredReader");
             this.ime = br.readLine();
-            System.out.println("Procitano je ime  " + this.ime);
+            System.out.println("Konektovan/na je:  " + this.ime);
             this.posaljiPoruku("Trenutno kontektovani korisnici su: " + server.dajImena());
             this.server.porukaSvima("Novi konektovani korisnik:"+this.ime, this);
-            String porukaKorisnika;
-            do{
-                porukaKorisnika=br.readLine();
-                if(porukaKorisnika==null)
-                    break;
+            String porukaKorisnika = br.readLine();
+
+            while(!(porukaKorisnika.equalsIgnoreCase("bye")) ){
                 this.server.porukaSvima("["+this.ime+"]:" + porukaKorisnika, this);
-            }while(!(porukaKorisnika.equalsIgnoreCase("bye")));
+                porukaKorisnika = br.readLine();//ovde je blokiralo kad treba da dobije bye
+                if(porukaKorisnika==null) {
+                    System.out.println(porukaKorisnika + " poruka korisnika je null ");
+                    break;
+                }
+            }
+            System.out.println("Doslo je do linije iza while petlje!");
             this.server.ukloni(this);
             this.klijentSoket.close();
-            server.porukaSvima(this.ime+"je napustio cet\n", this);
+            server.porukaSvima(this.ime+" je napustio\\la cet\n", this);
         } catch (IOException e) {
             System.out.println("U korisnickoj niti doslo je do izuzetka");
             e.printStackTrace();
@@ -45,7 +48,7 @@ public class KorisnickaNit extends Thread{
             this.pw.println(s);
             pw.flush();
         }else {
-            System.err.println("U korisnickoj niti print writer je null");
+            System.err.println("U korisnickoj niti PrintWriter je null");
         }
 
       }
