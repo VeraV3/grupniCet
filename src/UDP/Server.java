@@ -3,6 +3,7 @@ package UDP;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,13 +46,18 @@ public class Server {
 
 
   public List<String> dajImena(){
-            return this.skupKorisnika.stream().map(KorisnickaNit::getIme).collect(Collectors.toList());
+            List<String> imena = new ArrayList<>();
+            for(KorisnickaNit kn:skupKorisnika){
+                imena.add(kn.getIme());
+            }
+            return imena;
     }
 
     public void porukaSvima(String s, KorisnickaNit korisnickaNit) {
-            this.skupKorisnika.stream()
-                    .filter(u->u!=korisnickaNit)
-                    .forEach(u->u.posaljiPoruku(s));
+        for(KorisnickaNit kn:skupKorisnika){
+            if(!kn.equals(korisnickaNit))
+                  kn.posaljiPoruku(s);
+        }
     }
 
     public void ukloni(KorisnickaNit korisnickaNit) {

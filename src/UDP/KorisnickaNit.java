@@ -33,7 +33,6 @@ public class KorisnickaNit extends Thread{
                     break;
                 }
             }
-            System.out.println("Doslo je do linije iza while petlje!");
             this.server.ukloni(this);
             this.klijentSoket.close();
             server.porukaSvima(this.ime+" je napustio\\la cet\n", this);
